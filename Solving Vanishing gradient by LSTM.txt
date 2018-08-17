@@ -1,0 +1,19 @@
+Reducing vanishing gradient problem by LSTM:
+
+In a LSTM cell, the recurrency of the internal state involves:
+
+s(t) = s(t-1)*f + g*i,
+here, s(t) is the current state.
+s(t-1) is the previous state.
+f is the forget gate, f = sigmoid(input*UF + PrevStateOutput*VF)
+g is the input is squashed between -1 and 1, g = tanh(input*UG + PrevStateOputput*VG)
+i is the input gate, i = sigmoid(input*UI + PrevStateOutput*VI)
+All Us and Vs are weights.
+
+Taking partial derivative of the recurrency,
+
+ds(t)/ds(t-1) = f.
+
+Generally, the bias of the sigmoid in f is made large at the beginning of training so that f starts out as 1 , meaning that all past input states will be "remembered" in the cell. During training, the forget gate will reduce or eliminate the memory of certain components of the state s(t-1).
+
+
